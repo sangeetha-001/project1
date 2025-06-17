@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Our Team</title>
+  <style>
+    :root {
+      --primary: #8e2de2;
+      --secondary: #4a00e0;
+      --glass: rgba(255, 255, 255, 0.15);
+      --text: #fff;
+      --bg: #0f0f2d;
+      --accent: #00ffd0;
+      --blur: 15px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0f2d, #1f0048);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 15, 45, 0.7);
+      backdrop-filter: blur(var(--blur));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    header nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+      position: relative;
+    }
+
+    header nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    header nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    #clock {
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(var(--blur));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .about {
+      text-align: center;
+      font-size: 1.2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .card h3 {
+      margin-bottom: 0.6rem;
+      color: var(--accent);
+    }
+
+    .card p {
+      color: #ccc;
+    }
+
+    .card button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .soon::after {
+      content: "Coming Soon";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent);
+      color: black;
+      font-size: 0.7rem;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    form input, form textarea, form select {
+      padding: 1rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    form input:focus, form textarea:focus, form select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    form button {
+      background: var(--accent);
+      color: black;
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    form button:hover {
+      background: #00d9a0;
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .faq-item h4 {
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      display: none;
+      color: #ddd;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(15, 15, 45, 0.8);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div><strong>Join Our Team</strong></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#positions">Positions</a>
+      <a href="#faq">FAQs</a>
+      <a href="#apply">Apply</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div id="clock"></div>
+  </header>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <div class="glass about">
+      We’re <strong>DreamStartup</strong> — a futuristic, tech-savvy company that dreams big and builds bigger. Join our passionate team pushing boundaries and building world-class products!
+    </div>
+  </section>
+
+  <section id="positions">
+    <h2>Hiring Soon</h2>
+    <div class="card-grid">
+      <div class="card soon">
+        <h3>UI/UX Intern</h3>
+        <p>Design elegant and user-friendly interfaces.</p>
+      </div>
+      <div class="card soon">
+        <h3>DevOps Engineer</h3>
+        <p>Automate and manage robust infrastructure.</p>
+      </div>
+      <div class="card soon">
+        <h3>Product Manager</h3>
+        <p>Lead roadmaps and bridge tech + business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Roles</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Frontend Developer</h3>
+        <p>Turn designs into beautiful, functional interfaces.</p>
+        <button onclick="scrollToApply('Frontend Developer')">Apply</button>
+      </div>
+      <div class="card">
+        <h3>Backend Developer</h3>
+        <p>Build scalable backend APIs and systems.</p>
+        <button onclick="scrollToApply('Backend Developer')">Apply</button>
+      </div>
+      <div class="card">
+        <h3>Marketing Associate</h3>
+        <p>Help our brand grow with digital campaigns.</p>
+        <button onclick="scrollToApply('Marketing Associate')">Apply</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>FAQs</h2>
+    <div class="glass">
+      <div class="faq-item" onclick="toggleAnswer(this)">
+        <h4>Do I need prior experience?</h4>
+        <p class="faq-answer">We value potential and curiosity more than years of experience.</p>
+      </div>
+      <div class="faq-item" onclick="toggleAnswer(this)">
+        <h4>Is this a remote-friendly company?</h4>
+        <p class="faq-answer">Yes! We are fully remote with optional hybrid spaces.</p>
+      </div>
+      <div class="faq-item" onclick="toggleAnswer(this)">
+        <h4>How do I know if I’m a good fit?</h4>
+        <p class="faq-answer">If you're passionate, creative, and tech-savvy — you're our kind of person.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply">
+    <h2>Apply Now</h2>
+    <div class="glass">
+      <form onsubmit="submitForm(event)">
+        <input type="text" id="name" required placeholder="Full Name">
+        <input type="email" id="email" required placeholder="Email Address">
+        <select id="position" required>
+          <option value="">Select Role</option>
+          <option>Frontend Developer</option>
+          <option>Backend Developer</option>
+          <option>Marketing Associate</option>
+        </select>
+        <textarea id="cover" rows="4" placeholder="Tell us why you’d be a great fit!"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="glass about">
+      Got questions? Reach us at <strong>careers@dreamstartup.com</strong>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 DreamStartup • Designed with 💖 for innovation
+  </footer>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function toggleAnswer(item) {
+      const ans = item.querySelector(".faq-answer");
+      ans.style.display = ans.style.display === "block" ? "none" : "block";
+    }
+
+    function scrollToApply(position) {
+      document.getElementById("position").value = position;
+      document.getElementById("apply").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function submitForm(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const role = document.getElementById("position").value;
+      alert(Thanks, ${name}! Your application for ${role} has been received. 😊);
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
